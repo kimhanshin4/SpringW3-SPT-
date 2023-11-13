@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Slf4j(topic = "LoggingFilter") //지정한 topic 내용으로 log가 찍힘!
-@Component
+//@Component //필터가 Spring Sequrity에 영향을 주지 않도록
 @Order(1) //Filter에 순서를 지정할 수 있다. // 인증,인가 Filter보다 먼저 시작되게
 public class LoggingFilter implements Filter {
 

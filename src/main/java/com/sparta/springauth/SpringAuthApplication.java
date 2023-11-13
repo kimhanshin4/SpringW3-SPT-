@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class) // Spring Security 인증 기능 제외(초반 배울 땐 방해됨)
+@SpringBootApplication //Spring Security is on!!!
 public class SpringAuthApplication {
 
     public static void main(String[] args) {
