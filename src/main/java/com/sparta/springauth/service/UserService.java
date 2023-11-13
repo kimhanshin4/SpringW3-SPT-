@@ -62,22 +62,4 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void login(LoginRequestDto requestDto, HttpServletResponse res) {
-        String username = requestDto.getUsername();
-        String password = requestDto.getPassword();
-
-        //DB에 사용자가 존재하는지 확인
-        User user = userRepository.findByUsername(username).orElseThrow(
-            () -> new IllegalArgumentException("누구세요 휴먼?")
-        );
-
-        //비밀번호 확인
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new IllegalArgumentException("비밀번호가 다르잖아요!");
-        }
-
-        //인증완료 => JWT 생성 및 쿠키에 저장 후 Response 객체에 추가
-        String token = jwtUtil.createToken(user.getUsername(), user.getRole());
-        jwtUtil.addJwtToCookie(token, res);
-    }
 }
