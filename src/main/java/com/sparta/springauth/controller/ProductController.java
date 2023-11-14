@@ -1,7 +1,9 @@
 package com.sparta.springauth.controller;
 
+import com.sparta.springauth.dto.*;
 import com.sparta.springauth.entity.*;
 import com.sparta.springauth.security.*;
+import jakarta.validation.*;
 import org.springframework.security.access.annotation.*;
 import org.springframework.security.core.*;
 import org.springframework.security.core.annotation.*;
@@ -30,5 +32,11 @@ public class ProductController {
         }
 
         return "redirect:/";
+    }
+
+    @PostMapping("/validation")
+    @ResponseBody
+    public ProductRequestDto testValid(@RequestBody @Valid ProductRequestDto requestDto) {
+        return requestDto;
     }
 }
