@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.security.servlet.*;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.configuration.*;
+import org.springframework.security.config.annotation.method.configuration.*;
 import org.springframework.security.config.annotation.web.builders.*;
 import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.config.http.*;
@@ -14,6 +15,7 @@ import org.springframework.security.web.authentication.*;
 
 @Configuration
 @EnableWebSecurity // Spring Security 지원을 가능하게 함
+@EnableGlobalMethodSecurity(securedEnabled = true) //SSecurity 활성화
 public class WebSecurityConfig {
 
     private final JwtUtil jwtUtil;
@@ -72,6 +74,11 @@ public class WebSecurityConfig {
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
+        // 접근 불가 페이지
+        http.exceptionHandling((exceptionHandling) ->
+            exceptionHandling.accessDeniedPage("/forbidden.html"));
+
         return http.build();
     }
+
 }
